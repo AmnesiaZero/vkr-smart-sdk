@@ -25,7 +25,7 @@ class Report extends Model
         else{
             $apiMethod = "/".$this->prefix."/{$id}";
         }
-        $requestsLimit = 2000;
+        $requestsLimit = 300;
         $i = 0;
         do{
             $this->response = $this->getClient()->makeRequest($apiMethod,$params);
@@ -60,12 +60,12 @@ class Report extends Model
         $i = 1;
         foreach ($documents as $document)
         {
-            if($i>10){
+            if($i>5){
                 $response.="\n\nОстальные заимствованные документы можно посмотреть в отчёте:";
                 break;
             }
             $response.="\n\n".$i++.')'.$document['title'];
-            $percent = round($document['percent'],2);
+            $percent = round($document['percent'],4);
             $response.="\nПроцент заимствований - ".$percent."%";
             $response.="\nСсылка на документ - ".$document['link'];
         }
